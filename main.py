@@ -19,6 +19,8 @@ driver = uc.Chrome(options=options)
 token = "<your bot token>"
 telegramUrl = "https://api.telegram.org/bot" + token
 chat_id = 0
+REFRESH_INTERVAL = 60
+PAGE_TIMEOUT = 180
 
 
 def checkAVCenterStore(html, *args):
@@ -117,10 +119,10 @@ SHOPS = [
 ]
 
 while True:
-    time.sleep(60)
+    time.sleep(REFRESH_INTERVAL)
     for s in SHOPS:
         url = s.url
-        driver.set_page_load_timeout(180)
+        driver.set_page_load_timeout(PAGE_TIMEOUT)
         try:
             driver.get(url)
         except TimeoutException as e:
